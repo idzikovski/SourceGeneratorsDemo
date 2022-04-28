@@ -1,24 +1,51 @@
-﻿using SourceGenerators.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using SourceGenerators.Views;
+using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace SourceGenerators.ViewModels
 {
-    public class LoginViewModel
+    public partial class LoginViewModel //: ObservableObject
     {
-        public Command LoginCommand { get; }
+        //[ObservableProperty]
+        //[AlsoNotifyChangeFor(nameof(UsernameNotValid))]
+        //private string _username;
 
-        public LoginViewModel()
-        {
-            LoginCommand = new Command(OnLoginClicked);
-        }
+        //[ObservableProperty]
+        //[AlsoNotifyChangeFor(nameof(PasswordNotValid))]
+        //private string _password;
 
-        private async void OnLoginClicked(object obj)
-        {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-        }
+        //public bool UsernameNotValid => Username != null && !UsernameIsValid();
+
+        //public bool PasswordNotValid => Password != null && !PasswordIsValid();
+
+        //[ICommand]
+        //private async void Login(object obj)
+        //{
+        //    await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+        //}
+
+        //private bool UsernameIsValid()
+        //{
+        //    if (string.IsNullOrEmpty(Username))
+        //    {
+        //        return false;
+        //    }
+
+        //    Regex regex = new Regex(@"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$");
+        //    Match match = regex.Match(Username);
+        //    return match.Success;
+        //}
+
+        //private bool PasswordIsValid()
+        //{
+        //    if (string.IsNullOrEmpty(Password))
+        //    {
+        //        return false;
+        //    }
+
+        //    return (Password.Length > 3 && Password.Length < 11);
+        //}
     }
 }

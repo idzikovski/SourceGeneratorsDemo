@@ -8,6 +8,27 @@
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+            <Grid RowDefinitions="Auto, Auto"
+                  ColumnDefinitions="*, Auto">
+                <Entry Grid.Row="0"
+                       Grid.Column="0"
+                       Text="{Binding Username}"/>
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Text="⚠️"
+                       TextColor="Red"
+                       IsVisible="{Binding UsernameNotValid}"/>
+
+                <Entry Grid.Row="1"
+                       Grid.Column="0"
+                       IsPassword="True"
+                       Text="{Binding Password}"/>
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="⚠️"
+                       TextColor="Red"
+                       IsVisible="{Binding PasswordNotValid}"/>
+            </Grid>
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
