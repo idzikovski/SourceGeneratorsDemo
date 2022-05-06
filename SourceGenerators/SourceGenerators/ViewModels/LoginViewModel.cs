@@ -1,51 +1,36 @@
-﻿//using CommunityToolkit.Mvvm.ComponentModel;
-//using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using SourceGenerators.Views;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace SourceGenerators.ViewModels
 {
-    public partial class LoginViewModel //: ObservableObject
+    public partial class LoginViewModel : ObservableValidator
     {
-        //[ObservableProperty]
-        //[AlsoNotifyChangeFor(nameof(UsernameNotValid))]
-        //private string _username;
+        [ObservableProperty]
+        [AlsoNotifyChangeFor(nameof(UsernameNotValid))]
+        [Required]
+        [EmailAddress]
+        private string _username;
 
-        //[ObservableProperty]
-        //[AlsoNotifyChangeFor(nameof(PasswordNotValid))]
-        //private string _password;
+        [ObservableProperty]
+        [AlsoNotifyChangeFor(nameof(PasswordNotValid))]
+        [Required]
+        [MinLength(3)]
+        [MaxLength(10)]
+        private string _password;
 
-        //public bool UsernameNotValid => Username != null && !UsernameIsValid();
+        public bool UsernameNotValid => GetErrors(nameof(Username)).Any();
 
-        //public bool PasswordNotValid => Password != null && !PasswordIsValid();
+        public bool PasswordNotValid => GetErrors(nameof(Password)).Any();
 
-        //[ICommand]
-        //private async void Login(object obj)
-        //{
-        //    await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-        //}
-
-        //private bool UsernameIsValid()
-        //{
-        //    if (string.IsNullOrEmpty(Username))
-        //    {
-        //        return false;
-        //    }
-
-        //    Regex regex = new Regex(@"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$");
-        //    Match match = regex.Match(Username);
-        //    return match.Success;
-        //}
-
-        //private bool PasswordIsValid()
-        //{
-        //    if (string.IsNullOrEmpty(Password))
-        //    {
-        //        return false;
-        //    }
-
-        //    return (Password.Length > 3 && Password.Length < 11);
-        //}
+        [ICommand]
+        private async void Login(object obj)
+        {
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+        }
     }
 }
